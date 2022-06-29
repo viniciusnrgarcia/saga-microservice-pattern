@@ -1,6 +1,0 @@
-br/com/vnrg/sagaorderservice/openapi/model/Order.class
-br/com/vnrg/sagaorderservice/controller/OrderController.class
-br/com/vnrg/sagaorderservice/SagaOrderServiceApplication.class
-br/com/vnrg/sagaorderservice/openapi/model/ModelApiResponse.class
-br/com/vnrg/sagaorderservice/openapi/api/ApiUtil.class
-br/com/vnrg/sagaorderservice/openapi/api/OrderApi.class
