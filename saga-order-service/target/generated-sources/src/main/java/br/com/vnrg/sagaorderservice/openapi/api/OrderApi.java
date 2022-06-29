@@ -5,7 +5,9 @@
  */
 package br.com.vnrg.sagaorderservice.openapi.api;
 
+import br.com.vnrg.sagaorderservice.openapi.model.ModelApiResponse;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
+import java.util.UUID;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -29,7 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-06-27T19:11:35.168063657-03:00[America/Sao_Paulo]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-06-28T23:00:05.420767756-03:00[America/Sao_Paulo]")
 @Validated
 @Tag(name = "order", description = "Order operations")
 public interface OrderApi {
@@ -45,6 +47,7 @@ public interface OrderApi {
      * @param order Create a new Order (required)
      * @return Successful operation (status code 200)
      *         or Invalid input (status code 405)
+     *         or Internal server error (status code 500)
      */
     @Operation(
         operationId = "addOrder",
@@ -52,9 +55,10 @@ public interface OrderApi {
         tags = { "order" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ModelApiResponse.class))
             }),
-            @ApiResponse(responseCode = "405", description = "Invalid input")
+            @ApiResponse(responseCode = "405", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
         }
     )
     @RequestMapping(
@@ -63,18 +67,18 @@ public interface OrderApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<Order> _addOrder(
+    default ResponseEntity<ModelApiResponse> _addOrder(
         @Parameter(name = "Order", description = "Create a new Order", required = true) @Valid @RequestBody Order order
     ) {
         return addOrder(order);
     }
 
     // Override this method
-    default  ResponseEntity<Order> addOrder(Order order) {
+    default  ResponseEntity<ModelApiResponse> addOrder(Order order) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"quantity\" : 7, \"orderId\" : 198772, \"id\" : 10, \"orderDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"code\" : 0, \"type\" : \"type\", \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -87,167 +91,42 @@ public interface OrderApi {
 
     /**
      * DELETE /order/{orderId} : Deletes a Order
-     * 
+     * Delete an existent Order by Id
      *
      * @param orderId Order id to delete (required)
-     * @param apiKey  (optional)
-     * @return Invalid Order value (status code 400)
+     * @return Successful operation (status code 200)
+     *         or Invalid Order Id (status code 400)
+     *         or Internal server error (status code 500)
      */
     @Operation(
         operationId = "deleteOrder",
         summary = "Deletes a Order",
         tags = { "order" },
         responses = {
-            @ApiResponse(responseCode = "400", description = "Invalid Order value")
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ModelApiResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid Order Id"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
         }
     )
     @RequestMapping(
         method = RequestMethod.DELETE,
-        value = "/order/{orderId}"
-    )
-    default ResponseEntity<Void> _deleteOrder(
-        @Parameter(name = "orderId", description = "Order id to delete", required = true) @PathVariable("orderId") Long orderId,
-        @Parameter(name = "apiKey", description = "") @RequestHeader(value = "apiKey", required = false) String apiKey
-    ) {
-        return deleteOrder(orderId, apiKey);
-    }
-
-    // Override this method
-    default  ResponseEntity<Void> deleteOrder(Long orderId, String apiKey) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /order : Find all orders
-     * Find all orders
-     *
-     * @return successful operation (status code 200)
-     *         or Invalid status value (status code 400)
-     */
-    @Operation(
-        operationId = "findOrders",
-        summary = "Find all orders",
-        tags = { "order" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid status value")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/order",
-        produces = { "application/json" }
-    )
-    default ResponseEntity<List<Order>> _findOrders(
-        
-    ) {
-        return findOrders();
-    }
-
-    // Override this method
-    default  ResponseEntity<List<Order>> findOrders() {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"quantity\" : 7, \"orderId\" : 198772, \"id\" : 10, \"orderDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /order/findByStatus : Finds Order by status
-     * Multiple status values can be provided with comma separated strings
-     *
-     * @param status Status values that need to be considered for filter (optional, default to available)
-     * @return successful operation (status code 200)
-     *         or Invalid status value (status code 400)
-     */
-    @Operation(
-        operationId = "findOrdersByStatus",
-        summary = "Finds Order by status",
-        tags = { "order" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid status value")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/order/findByStatus",
-        produces = { "application/json" }
-    )
-    default ResponseEntity<List<Order>> _findOrdersByStatus(
-        @Parameter(name = "status", description = "Status values that need to be considered for filter") @Valid @RequestParam(value = "status", required = false, defaultValue = "available") String status
-    ) {
-        return findOrdersByStatus(status);
-    }
-
-    // Override this method
-    default  ResponseEntity<List<Order>> findOrdersByStatus(String status) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"quantity\" : 7, \"orderId\" : 198772, \"id\" : 10, \"orderDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /order/{orderId} : Find Order by ID
-     * Returns a single order
-     *
-     * @param orderId ID of order to return (required)
-     * @return successful operation (status code 200)
-     *         or Invalid ID supplied (status code 400)
-     *         or Order not found (status code 404)
-     */
-    @Operation(
-        operationId = "getOrderById",
-        summary = "Find Order by ID",
-        tags = { "order" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
-            @ApiResponse(responseCode = "404", description = "Order not found")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
         value = "/order/{orderId}",
         produces = { "application/json" }
     )
-    default ResponseEntity<Order> _getOrderById(
-        @Parameter(name = "orderId", description = "ID of order to return", required = true) @PathVariable("orderId") Long orderId
+    default ResponseEntity<ModelApiResponse> _deleteOrder(
+        @Parameter(name = "orderId", description = "Order id to delete", required = true) @PathVariable("orderId") UUID orderId
     ) {
-        return getOrderById(orderId);
+        return deleteOrder(orderId);
     }
 
     // Override this method
-    default  ResponseEntity<Order> getOrderById(Long orderId) {
+    default  ResponseEntity<ModelApiResponse> deleteOrder(UUID orderId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"quantity\" : 7, \"orderId\" : 198772, \"id\" : 10, \"orderDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"code\" : 0, \"type\" : \"type\", \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -267,6 +146,7 @@ public interface OrderApi {
      *         or Invalid ID supplied (status code 400)
      *         or Order not found (status code 404)
      *         or Validation exception (status code 405)
+     *         or Internal server error (status code 500)
      */
     @Operation(
         operationId = "updateOrder",
@@ -274,11 +154,12 @@ public interface OrderApi {
         tags = { "order" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ModelApiResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
             @ApiResponse(responseCode = "404", description = "Order not found"),
-            @ApiResponse(responseCode = "405", description = "Validation exception")
+            @ApiResponse(responseCode = "405", description = "Validation exception"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
         }
     )
     @RequestMapping(
@@ -287,18 +168,18 @@ public interface OrderApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<Order> _updateOrder(
+    default ResponseEntity<ModelApiResponse> _updateOrder(
         @Parameter(name = "Order", description = "Update an existent Order", required = true) @Valid @RequestBody Order order
     ) {
         return updateOrder(order);
     }
 
     // Override this method
-    default  ResponseEntity<Order> updateOrder(Order order) {
+    default  ResponseEntity<ModelApiResponse> updateOrder(Order order) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"quantity\" : 7, \"orderId\" : 198772, \"id\" : 10, \"orderDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"code\" : 0, \"type\" : \"type\", \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

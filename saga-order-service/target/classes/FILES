@@ -1,3 +1,4 @@
 src/main/java/br/com/vnrg/sagaorderservice/openapi/api/ApiUtil.java
 src/main/java/br/com/vnrg/sagaorderservice/openapi/api/OrderApi.java
+src/main/java/br/com/vnrg/sagaorderservice/openapi/model/ModelApiResponse.java
 src/main/java/br/com/vnrg/sagaorderservice/openapi/model/Order.java
