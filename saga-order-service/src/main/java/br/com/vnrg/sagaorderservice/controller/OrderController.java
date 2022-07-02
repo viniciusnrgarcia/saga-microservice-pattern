@@ -22,6 +22,7 @@ class OrderController implements OrderApi {
     @Override
     public ResponseEntity<ModelApiResponse> addOrder(Order order) {
         log.info("addOrder {}", order.toString());
+
         this.service.createOrder(order);
 
         var response = new ModelApiResponse();

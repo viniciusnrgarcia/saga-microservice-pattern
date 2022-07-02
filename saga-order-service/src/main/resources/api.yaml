@@ -109,8 +109,11 @@ components:
       type: object
       properties:
         orderType:
-          type: string
-          format: uuid
+          type: integer
+          minimum: 1
+        orderState:
+          type: integer
+          minimum: 1
         orderDescription:
           type: string
         orderValue:

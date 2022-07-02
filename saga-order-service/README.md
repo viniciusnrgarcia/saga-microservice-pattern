@@ -40,3 +40,4 @@ https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-ge
 https://openapi-generator.tech/docs/plugins/
 https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-gradle-plugin/README.adoc
         https://openapi-generator.tech/docs/generators/spring
+https://cloudevents.io/

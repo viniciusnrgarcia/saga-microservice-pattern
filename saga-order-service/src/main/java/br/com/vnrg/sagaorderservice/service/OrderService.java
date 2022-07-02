@@ -1,9 +1,11 @@
 package br.com.vnrg.sagaorderservice.service;
 
-import br.com.vnrg.sagaorderservice.handler.event.OrderCreatedEvent;
-import br.com.vnrg.sagaorderservice.handler.publisher.OrderCreatedEventPublisher;
+import br.com.vnrg.sagaorderservice.mapper.OrderMapper;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
+import br.com.vnrg.sagaorderservice.producer.OrderEventProducer;
 import br.com.vnrg.sagaorderservice.repository.OrderRepository;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,15 +13,27 @@ public class OrderService {
 
     private final OrderRepository repository;
 
-    private final OrderCreatedEventPublisher orderPublisher;
+    private final OrderEventProducer eventProducer;
 
-    public OrderService(OrderRepository repository, OrderCreatedEventPublisher orderPublisher) {
+    private final NamedParameterJdbcTemplate template;
+
+    public OrderService(OrderRepository repository, OrderEventProducer eventProducer, NamedParameterJdbcTemplate template) {
         this.repository = repository;
-        this.orderPublisher = orderPublisher;
+        this.eventProducer = eventProducer;
+        this.template = template;
     }
 
     public void createOrder(Order order) {
-        this.repository.save(order);
-        this.orderPublisher.publish(new OrderCreatedEvent(order));
+        var entity = OrderMapper.INSTANCE.toOrderEntity(order);
+        // entity.setId(GeneratorID.stringUUID());
+//        entity.setCreatedAt(LocalDateTime.now());
+//        entity.setUserCreated("saga-order-service");
+//        entity.setUpdatedAt(LocalDateTime.now());
+//        entity.setUserUpdated("saga-order-service");
+        var paramMap = new MapSqlParameterSource();
+        this.repository.save(entity);
+
+        // this.orderPublisher.publish(new OrderCreatedEvent(order));
+        // this.eventProducer.send(order);
     }
 }
