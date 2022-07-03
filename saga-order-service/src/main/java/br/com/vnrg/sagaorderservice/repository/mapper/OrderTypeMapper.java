@@ -1,6 +1,6 @@
-package br.com.vnrg.sagaorderservice.mapper;
+package br.com.vnrg.sagaorderservice.repository.mapper;
 
-import br.com.vnrg.sagaorderservice.entity.OrderStateEntity;
+import br.com.vnrg.sagaorderservice.repository.entity.OrderStateEntity;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -8,10 +8,10 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface OrderStateMapper {
+public interface OrderTypeMapper {
 
-    OrderStateMapper INSTANCE = Mappers.getMapper(OrderStateMapper.class);
+    OrderTypeMapper INSTANCE = Mappers.getMapper(OrderTypeMapper.class);
 
-    @Mapping(target = "id", source = "orderState")
+    @Mapping(target = "id", source = "orderType")
     public OrderStateEntity toOrderStateEntity(Order order);
 }

@@ -1,6 +1,6 @@
-package br.com.vnrg.sagaorderservice.mapper;
+package br.com.vnrg.sagaorderservice.repository.mapper;
 
-import br.com.vnrg.sagaorderservice.entity.OrderEntity;
+import br.com.vnrg.sagaorderservice.repository.entity.OrderEntity;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

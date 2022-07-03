@@ -1,7 +1,5 @@
 version: '3'
-
 services:
-
   mysql:
     image: mysql
     ports:
@@ -14,4 +12,11 @@ services:
       MYSQL_USER: orderuser
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: order
-
+  rabbitmq:
+    image: rabbitmq:3.10.5-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: guest

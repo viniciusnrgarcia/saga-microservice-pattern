@@ -1,4 +1,4 @@
-package br.com.vnrg.sagaorderservice.entity;
+package br.com.vnrg.sagaorderservice.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
