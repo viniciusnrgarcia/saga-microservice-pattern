@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_type")
+@Table(name = "tb_order_type")
 public class OrderTypeEntity {
 
     @Id

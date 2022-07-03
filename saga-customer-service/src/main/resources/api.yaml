@@ -1,0 +1,75 @@
+openapi: 3.0.2
+info:
+  title: Swagger Saga Pattern Customer Service - OpenAPI 3.0
+  description: |-
+    OpenAPI 3.0 specification.
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: viniciusnrgarcia@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 0.0.1
+servers:
+  - url: /api/v1
+
+tags:
+  - name: customer
+    description: Customer operations
+    externalDocs:
+      description: More information
+      url: 'http://swagger.io'
+
+paths:
+  /customers:
+    post:
+      tags:
+        - order
+      summary: Add a new Customer
+      description: Add a new Customer
+      operationId: addCustomer
+      requestBody:
+        description: Create a new Customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelApiResponse'
+        '405':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        username:
+          type: string
+          format: string
+        password:
+          type: string
+          format: string
+        name:
+          type: string
+          format: string
+
+    ModelApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string

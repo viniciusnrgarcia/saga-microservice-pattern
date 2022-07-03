@@ -5,18 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order")
+@Table(name = "tb_order")
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "order_type")
     private Integer orderType;
@@ -26,6 +28,9 @@ public class OrderEntity {
 
     @Column(name = "order_state")
     private Integer orderState;
+
+    @Column(name = "order_value")
+    private BigDecimal orderValue;
 
     @Column(name = "product_id")
     private String productId;

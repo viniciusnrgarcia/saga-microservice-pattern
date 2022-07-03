@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_state")
+@Table(name = "tb_order_state")
 public class OrderStateEntity {
 
     @Id
