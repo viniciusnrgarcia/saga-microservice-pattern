@@ -59,6 +59,7 @@ https://cloudevents.github.io/sdk-java/
 
 ### RabbitMQ
 #### AMQP – Advanced Message Queuing Protocol
+https://docs.spring.io/spring-amqp/docs/current/reference/html
 https://docs.spring.io/spring-amqp/docs/current/reference/html/#spring-rabbit-json
 http://tryrabbitmq.com/
 https://www.baeldung.com/spring-amqp

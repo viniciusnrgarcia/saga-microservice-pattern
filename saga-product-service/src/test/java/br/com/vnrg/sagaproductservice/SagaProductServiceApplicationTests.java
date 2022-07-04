@@ -1,13 +1,12 @@
 package br.com.vnrg.sagaproductservice;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SagaOrderServiceApplicationTests {
+class SagaProductServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }

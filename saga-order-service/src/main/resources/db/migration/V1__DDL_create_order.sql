@@ -1,10 +1,12 @@
 CREATE TABLE IF NOT EXISTS order.tb_order_type (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	order_type INT,
 	order_type_description varchar(255)
 ) engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS order.tb_order_state (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	order_state INT,
 	order_state_description varchar(255)
 ) engine=InnoDB;
 

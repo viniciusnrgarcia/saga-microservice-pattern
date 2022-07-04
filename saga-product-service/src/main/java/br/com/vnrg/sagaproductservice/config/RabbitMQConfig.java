@@ -1,4 +1,4 @@
-package br.com.vnrg.sagaorderservice.config;
+package br.com.vnrg.sagaproductservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

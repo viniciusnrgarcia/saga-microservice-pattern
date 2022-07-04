@@ -2,7 +2,7 @@ package br.com.vnrg.sagaorderservice.service;
 
 import br.com.vnrg.sagaorderservice.repository.mapper.OrderMapper;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
-import br.com.vnrg.sagaorderservice.messaging.producer.OrderEventProducer;
+import br.com.vnrg.sagaorderservice.messaging.producer.OrderCreatedPublisher;
 import br.com.vnrg.sagaorderservice.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ public class OrderService {
 
     private final OrderRepository repository;
 
-    private final OrderEventProducer eventProducer;
+    private final OrderCreatedPublisher eventProducer;
 
-    public OrderService(OrderRepository repository, OrderEventProducer eventProducer) {
+    public OrderService(OrderRepository repository, OrderCreatedPublisher eventProducer) {
         this.repository = repository;
         this.eventProducer = eventProducer;
     }
