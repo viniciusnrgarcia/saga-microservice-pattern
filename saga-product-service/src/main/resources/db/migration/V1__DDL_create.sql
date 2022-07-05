@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS product.tb_product_state (
 
 CREATE TABLE IF NOT EXISTS product.tb_product (
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	product_id varchar(255),
 	product_items int,
     product_value DECIMAL(15, 2) ,
     product_description varchar(255),
@@ -23,7 +22,6 @@ CREATE TABLE IF NOT EXISTS product.tb_product_order (
 	product_items int,
 	product_value DECIMAL(15, 2) ,
     product_state_id varchar(255) ,
-    product_description varchar(255),
     order_id BIGINT NOT NULL,
     order_value DECIMAL(15, 2) ,
     customer_id varchar(255),

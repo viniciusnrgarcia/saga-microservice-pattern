@@ -17,7 +17,7 @@ public class Order implements Serializable {
 
     private BigDecimal orderValue;
 
-    private UUID productId;
+    private Long productId;
 
     private Integer productItems;
 

@@ -19,8 +19,8 @@ public class OrderCreatedReceiver {
     @RabbitListener(queues = "${spring.rabbitmq.queue.order-created-product}",
             concurrency = "${spring.rabbitmq.queue.order-created-product-concurrency:1}")
     public void listen(final Order order) {
-        log.info("Order-created received {}", order.toString());
-        this.productService.reserveProduct();
+        log.info("order-created received {}", order.toString());
+        this.productService.reserveProduct(order);
         this.productService.createProductOrder();
     }
 

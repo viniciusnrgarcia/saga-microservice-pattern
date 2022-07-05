@@ -19,6 +19,7 @@
     <modules>
         <module>saga-order-service</module>
         <module>saga-customer-service</module>
+        <module>saga-product-service</module>
     </modules>
 
 </project>
