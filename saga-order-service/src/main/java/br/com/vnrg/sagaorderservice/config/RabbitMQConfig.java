@@ -78,6 +78,11 @@ public class RabbitMQConfig {
         return new Queue(this.config.getOrderCreatedQueue(), false);
     }
 
+    @Bean
+    public Queue queueProductNotAvailable() {
+        return new Queue(this.config.getProductNotAvailableQueue(), false);
+    }
+
     /**
      * {@code
      * new TopicExchange("order-created-exchange");
@@ -91,11 +96,15 @@ public class RabbitMQConfig {
         return new FanoutExchange(this.config.getExchangeName());
     }
 
+    @Bean
+    public FanoutExchange productNotAvailableExchange() {
+        return new FanoutExchange(this.config.getProductNotAvailableExchangeName());
+    }
+
     /**
-     *
      * Exemplo sem routingKey
      * {@code }return BindingBuilder.bind(queue()).to(exchange()).withQueueName();}
-     *
+     * <p>
      * Exemplo com routingKey
      * {@code
      * BindingBuilder.bind(queue()).to(exchange()).with("*");
@@ -114,9 +123,19 @@ public class RabbitMQConfig {
      * BindingBuilder.bind(topicQueue1).to(topicExchange).with("*.important.*"),
      * BindingBuilder.bind(topicQueue2).to(topicExchange).with("#.error"));
      * }
+     * <p>
+     * Exemplo unico binding
+     * {@code
+     * @Bean public Binding binding() {
+     * return BindingBuilder.bind(queue()).to(exchange());
+     * }
+     * }
      */
     @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange());
+    public Declarables bindings() {
+        return new Declarables(
+                BindingBuilder.bind(queue()).to(exchange()),
+                BindingBuilder.bind(queueProductNotAvailable()).to(productNotAvailableExchange())
+        );
     }
 }

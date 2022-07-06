@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS order.tb_order (
 	order_description varchar(255) ,
 	order_value DECIMAL(15, 2) ,
 	order_state INT ,
-	product_id varchar(255),
+	product_id BIGINT,
 	product_items int,
     product_description varchar(255),
     customer_id varchar(255),

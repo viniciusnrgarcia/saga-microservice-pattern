@@ -1,7 +1,7 @@
 package br.com.vnrg.sagaorderservice.messaging.producer;
 
 import br.com.vnrg.sagaorderservice.config.BroadcastConfig;
-import br.com.vnrg.sagaorderservice.openapi.model.Order;
+import br.com.vnrg.sagaorderservice.domain.OrderDomain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,7 +34,7 @@ public class OrderCreatedPublisher {
      * CloudEvent event = eventBuilder.build();
      * }
      */
-    public void send(final Order data) {
+    public void send(final OrderDomain data) {
         log.info("Send event: {}", data.toString());
         this.rabbitTemplate.convertAndSend(broadcastConfig.getExchangeName(), "", data);
     }

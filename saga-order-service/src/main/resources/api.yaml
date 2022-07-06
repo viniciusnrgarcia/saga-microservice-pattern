@@ -119,7 +119,7 @@ components:
         orderValue:
           type: number
         productId:
-          type: number
+          type: integer
           format: int64
         productItems:
           type: integer

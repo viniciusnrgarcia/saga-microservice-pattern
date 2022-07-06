@@ -1,8 +1,10 @@
 package br.com.vnrg.sagaorderservice.repository.mapper;
 
-import br.com.vnrg.sagaorderservice.repository.entity.OrderEntity;
+import br.com.vnrg.sagaorderservice.domain.OrderDomain;
 import br.com.vnrg.sagaorderservice.openapi.model.Order;
+import br.com.vnrg.sagaorderservice.repository.entity.OrderEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -19,5 +21,8 @@ public interface OrderMapper {
     // @Mapping(target = "orderState.id", source = "orderState")
     // @Mapping(target = "orderType.id", source = "orderType")
     public OrderEntity toOrderEntity(Order order);
+
+    @Mapping(source = "id", target = "orderId")
+    public OrderDomain toOrderDomain(OrderEntity orderEntity);
 
 }

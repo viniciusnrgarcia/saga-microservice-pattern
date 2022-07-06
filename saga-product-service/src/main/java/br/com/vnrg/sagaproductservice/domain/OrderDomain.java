@@ -1,13 +1,19 @@
 package br.com.vnrg.sagaproductservice.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
-public class Order implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderDomain implements Serializable {
+
+    private Long orderId;
 
     private Integer orderType;
 
@@ -24,5 +30,4 @@ public class Order implements Serializable {
     private String productDescription;
 
     private UUID customerId;
-
 }

@@ -17,6 +17,12 @@ public class BroadcastConfig {
     @Value("${spring.rabbitmq.queue.order-created}")
     private String orderCreatedQueue;
 
+    @Value("${spring.rabbitmq.queue.product-not-available}")
+    private String productNotAvailableQueue;
+
+    @Value("${spring.rabbitmq.product-not-available-exchange-name}")
+    private String productNotAvailableExchangeName;
+
     @Value("${spring.rabbitmq.connection-factory.hostname}")
     private String hostname;
 

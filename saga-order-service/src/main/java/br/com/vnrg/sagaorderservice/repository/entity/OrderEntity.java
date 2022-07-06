@@ -33,7 +33,7 @@ public class OrderEntity {
     private BigDecimal orderValue;
 
     @Column(name = "product_id")
-    private String productId;
+    private Long productId;
 
     @Column(name = "product_description")
     private String productDescription;

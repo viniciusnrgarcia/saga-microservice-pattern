@@ -31,6 +31,8 @@ spring:
     show-sql: 'true'
   rabbitmq:
     exchange-name: ${RABBITMQ_EXCHANGE_NAME:order-created-exchange.fanout.exchange}
+    reserved-product-exchange-name: ${RABBITMQ_EXCHANGE_NAME:reserved-product-exchange.fanout.exchange}
+    product-not-available-exchange-name: ${RABBITMQ_EXCHANGE_NAME:product-not-available-exchange.fanout.exchange}
     routingKey: ${RABBITMQ_EXCHANGE_ROUTING_KEY:}
     queue:
       order-created-product: ${RABBITMQ_QUEUE_ORDER_CREATED:order-created-product-exchange.fanout.queue}

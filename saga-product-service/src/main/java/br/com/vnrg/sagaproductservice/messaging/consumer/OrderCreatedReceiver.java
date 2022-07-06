@@ -1,6 +1,6 @@
 package br.com.vnrg.sagaproductservice.messaging.consumer;
 
-import br.com.vnrg.sagaproductservice.domain.Order;
+import br.com.vnrg.sagaproductservice.domain.OrderDomain;
 import br.com.vnrg.sagaproductservice.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -18,10 +18,10 @@ public class OrderCreatedReceiver {
 
     @RabbitListener(queues = "${spring.rabbitmq.queue.order-created-product}",
             concurrency = "${spring.rabbitmq.queue.order-created-product-concurrency:1}")
-    public void listen(final Order order) {
+    public void listen(final OrderDomain order) {
         log.info("order-created received {}", order.toString());
         this.productService.reserveProduct(order);
-        this.productService.createProductOrder();
+        this.productService.createProductOrder(order);
     }
 
 }

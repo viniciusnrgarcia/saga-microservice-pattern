@@ -27,9 +27,11 @@ spring:
     show-sql: 'true'
   rabbitmq:
     exchange-name: ${RABBITMQ_EXCHANGE_NAME:order-created-exchange.fanout.exchange}
+    product-not-available-exchange-name: ${RABBITMQ_EXCHANGE_NAME:product-not-available-exchange.fanout.exchange}
     routingKey: ${RABBITMQ_EXCHANGE_ROUTING_KEY:}
     queue:
       order-created: ${RABBITMQ_QUEUE_ORDER_CREATED:order-created-exchange.fanout.queue}
+      product-not-available: ${RABBITMQ_QUEUE_ORDER_CREATED:product-not-available-exchange.fanout.queue}
     connection-factory:
       hostname: ${RABBITMQ_CONNECTION_FACTORY_HOSTNAME:localhost}
       port: ${RABBITMQ_CONNECTION_FACTORY_PORT:5672}

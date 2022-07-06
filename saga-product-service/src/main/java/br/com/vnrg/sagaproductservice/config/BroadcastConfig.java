@@ -11,6 +11,12 @@ public class BroadcastConfig {
     @Value("${spring.rabbitmq.exchange-name}")
     private String exchangeName;
 
+    @Value("${spring.rabbitmq.product-not-available-exchange-name}")
+    private String productNotAvailableExchangeName;
+
+    @Value("${spring.rabbitmq.reserved-product-exchange-name}")
+    private String reservedProductExchangeName;
+
     @Value("${spring.rabbitmq.routingKey}")
     private String routingKey;
 
