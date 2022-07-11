@@ -33,6 +33,7 @@ spring:
     # exchange-name: ${RABBITMQ_EXCHANGE_NAME:order-created-exchange.fanout.exchange}
     reserved-product-exchange-name: ${RABBITMQ_EXCHANGE_NAME:reserved-product-exchange.fanout.exchange}
     # product-not-available-exchange-name: ${RABBITMQ_EXCHANGE_NAME:product-not-available-exchange.fanout.exchange}
+    payment-completed-exchange-name: ${RABBITMQ_PAYMENT_COMPLETED_EXCHANGE_NAME:payment-completed-exchange.fanout.exchange}
     routingKey: ${RABBITMQ_EXCHANGE_ROUTING_KEY:}
     queue:
       reserved-product-payment: ${RABBITMQ_QUEUE_RESERVED_PRODUCT:reserved-product-exchange.fanout.queue}

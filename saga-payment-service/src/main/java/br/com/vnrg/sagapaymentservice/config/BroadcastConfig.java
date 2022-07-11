@@ -14,6 +14,9 @@ public class BroadcastConfig {
     @Value("${spring.rabbitmq.queue.reserved-product-payment}")
     private String reservedProductQueue;
 
+    @Value("${spring.rabbitmq.payment-completed-exchange-name}")
+    private String paymentCompletedExchangeName;
+
     @Value("${spring.rabbitmq.routingKey}")
     private String routingKey;
 

@@ -23,6 +23,12 @@ public class BroadcastConfig {
     @Value("${spring.rabbitmq.product-not-available-exchange-name}")
     private String productNotAvailableExchangeName;
 
+    @Value("${spring.rabbitmq.payment-completed-exchange-name}")
+    private String paymentCompletedExchangeName;
+
+    @Value("${spring.rabbitmq.queue.payment-completed}")
+    private String paymentCompletedQueue;
+
     @Value("${spring.rabbitmq.connection-factory.hostname}")
     private String hostname;
 

@@ -83,6 +83,11 @@ public class RabbitMQConfig {
         return new Queue(this.config.getProductNotAvailableQueue(), false);
     }
 
+    @Bean
+    public Queue queuePaymentCompleted() {
+        return new Queue(this.config.getPaymentCompletedQueue(), false);
+    }
+
     /**
      * {@code
      * new TopicExchange("order-created-exchange");
@@ -99,6 +104,11 @@ public class RabbitMQConfig {
     @Bean
     public FanoutExchange productNotAvailableExchange() {
         return new FanoutExchange(this.config.getProductNotAvailableExchangeName());
+    }
+
+    @Bean
+    public FanoutExchange paymentCompletedExchange() {
+        return new FanoutExchange(this.config.getPaymentCompletedExchangeName());
     }
 
     /**
@@ -135,7 +145,8 @@ public class RabbitMQConfig {
     public Declarables bindings() {
         return new Declarables(
                 BindingBuilder.bind(queue()).to(exchange()),
-                BindingBuilder.bind(queueProductNotAvailable()).to(productNotAvailableExchange())
+                BindingBuilder.bind(queueProductNotAvailable()).to(productNotAvailableExchange()),
+                BindingBuilder.bind(queuePaymentCompleted()).to(paymentCompletedExchange())
         );
     }
 }
