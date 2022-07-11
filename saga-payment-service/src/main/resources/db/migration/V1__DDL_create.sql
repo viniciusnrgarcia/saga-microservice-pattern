@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS payment.tb_payment (
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	order_id BIGINT
+) engine=InnoDB;

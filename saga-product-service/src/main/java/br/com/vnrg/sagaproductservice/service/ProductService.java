@@ -30,14 +30,14 @@ public class ProductService {
     public void reserveProduct(final OrderDomain order) {
         var rowsUpdated = repository.updateProductItemReserved(order.getProductId());
         if (rowsUpdated == 0) {
-            order.setOrderState(7);
+            order.setOrderState(6);
             order.setProductItems(0);
             this.productNotAvailablePublisher.send(order);
         }
     }
 
     public void createProductOrder(final OrderDomain order) {
-        if (order.getOrderState() != 7) {
+        if (order.getOrderState() != 6) {
             var entity = ProductOrderMapper.INSTANCE.toEntity(order);
             // 0-pendente pagamento, 1-pagamento confirmado, 2-pagamento não autorizado
             entity.setProductOrderStatus(0);

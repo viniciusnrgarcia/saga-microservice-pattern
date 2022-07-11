@@ -1,11 +1,13 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:0}
 
 spring:
   application:
-    name: saga-order-service
+    name: saga-payment-service
   main:
     banner-mode: OFF
+  jackson:
+    default-property-inclusion: USE_DEFAULTS
   datasource:
     hikari:
       connectionTimeout: ${HIKARI_MAXIMUM_CON_TIMEOUT:20000}
@@ -14,7 +16,7 @@ spring:
     testWhileIdle: 'true'
     password: ${DATASOURCE_PASSWORD:123456}
     username: ${DATASOURCE_USERNAME:root}
-    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3306/order?useSSL=false&createDatabaseIfNotExist=true}
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3306/payment?useSSL=false&createDatabaseIfNotExist=true}
     validationQuery: SELECT 1
   jpa:
     hibernate:
@@ -28,12 +30,13 @@ spring:
         show_sql: 'true'
     show-sql: 'true'
   rabbitmq:
-    exchange-name: ${RABBITMQ_EXCHANGE_NAME:order-created-exchange.fanout.exchange}
-    product-not-available-exchange-name: ${RABBITMQ_EXCHANGE_NAME:product-not-available-exchange.fanout.exchange}
+    # exchange-name: ${RABBITMQ_EXCHANGE_NAME:order-created-exchange.fanout.exchange}
+    reserved-product-exchange-name: ${RABBITMQ_EXCHANGE_NAME:reserved-product-exchange.fanout.exchange}
+    # product-not-available-exchange-name: ${RABBITMQ_EXCHANGE_NAME:product-not-available-exchange.fanout.exchange}
     routingKey: ${RABBITMQ_EXCHANGE_ROUTING_KEY:}
     queue:
-      order-created: ${RABBITMQ_QUEUE_ORDER_CREATED:order-created-exchange.fanout.queue}
-      product-not-available: ${RABBITMQ_QUEUE_ORDER_CREATED:product-not-available-exchange.fanout.queue}
+      reserved-product-payment: ${RABBITMQ_QUEUE_RESERVED_PRODUCT:reserved-product-exchange.fanout.queue}
+      #order-created-product: ${RABBITMQ_QUEUE_ORDER_CREATED:order-created-product-exchange.fanout.queue}
     connection-factory:
       hostname: ${RABBITMQ_CONNECTION_FACTORY_HOSTNAME:localhost}
       port: ${RABBITMQ_CONNECTION_FACTORY_PORT:5672}
