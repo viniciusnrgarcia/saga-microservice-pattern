@@ -2,7 +2,7 @@
 
 Básico exemplo de arquitetura de microsserviços utilizando o padrão SAGA.
 
-!(https://github.com/viniciusnrgarcia/saga-microservice-pattern/assets/storming.png)
+!(https://github.com/viniciusnrgarcia/saga-microservice-pattern/blob/main/assets/storming.png)
 
 ## Instalação
 
