@@ -22,7 +22,10 @@ docker-compose -f docker-compose.yml up -d
 
 ### Referências
 
-# OpenAPI 3
+### Saga
+https://microservices.io/patterns/data/saga.html
+
+### OpenAPI 3
 https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin
 https://openapi-generator.tech/docs/plugins/
 https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-gradle-plugin/README.adoc
